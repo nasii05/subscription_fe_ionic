@@ -1,0 +1,7 @@
+{
+  "name": "subscription_manager",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
