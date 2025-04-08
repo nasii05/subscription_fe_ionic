@@ -1,0 +1,21 @@
+<ion-content>
+    <div class="container">
+        <div class="login-container">
+            <ion-card class="card">
+                <h2>Login</h2>
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <div class="form-container">
+                        <ion-input formControlName="email" type="email" label="Enter the email" labelPlacement="floating" fill="outline"></ion-input>
+                    </div>
+                    <br>
+                    <div class="form-container">
+                        <ion-input formControlName="password" type="password" label="Enter the password" labelPlacement="floating" fill="outline"></ion-input>
+                    </div>
+                    <div class="btn-container">
+                        <ion-button type="submit" [disabled]="loginForm.invalid" shape="round" fill="outline">Login</ion-button>
+                    </div>
+                </form>
+            </ion-card>
+        </div>
+    </div>
+</ion-content>
