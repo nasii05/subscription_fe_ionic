@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  
   loginForm: FormGroup;
 
   email = '';
@@ -16,7 +18,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -36,8 +39,11 @@ export class LoginPage implements OnInit {
           console.log('Login successful:', response);
 
           const token = response.data?.token;
-          localStorage.setItem('authToken', token);
-          localStorage.setItem('user', JSON.stringify(response.data?.user));
+          if(token){
+            localStorage.setItem('authToken', token);
+            localStorage.setItem('user', JSON.stringify(response.data?.user));
+            this.router.navigate(['home']);
+          }
         },
         error: (err) => {
           console.error('Login error:', err);
